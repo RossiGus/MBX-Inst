@@ -285,6 +285,23 @@
 .sheet .strip .k{font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .sheet .strip .val{font-size:11.5px;color:var(--ink);margin-top:2px}
 
+/* filtro de categorias */
+.filtros{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;padding:8px 16px;border:1px solid var(--line);color:var(--ink-2);transition:border-color .2s,color .2s,background .2s}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip.active{background:var(--ink);border-color:var(--ink);color:var(--vellum)}
+
+/* detalhe de produto */
+.produto-detalhe{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(24px,4vw,48px);align-items:start}
+@media(max-width:820px){.produto-detalhe{grid-template-columns:1fr}}
+.galeria{display:flex;flex-direction:column;gap:12px}
+.galeria .plate{position:relative;aspect-ratio:5/3.4;border:1px solid var(--line);background-image:linear-gradient(rgba(160,152,133,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(160,152,133,.14) 1px,transparent 1px);background-size:16px 16px;background-color:var(--panel);overflow:hidden}
+.info-produto h1{margin-top:14px;font-size:clamp(27px,4vw,42px);font-weight:700;letter-spacing:-.03em;line-height:1.04}
+.info-produto .hero-lede{margin-top:16px}
+.specs-list{margin-top:20px;border-top:1px solid var(--line)}
+.specs-list li{list-style:none;padding:11px 0;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:13px;color:var(--ink-2)}
+.info-produto .btn{margin-top:26px}
+
 /* mid CTA band */
 .band{margin-block:var(--sec-y);border:1px solid var(--ink);background:var(--ink);color:var(--vellum);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:clamp(30px,5vw,54px)}
 .band::before{content:"";position:absolute;inset:0;opacity:.4;background:repeating-linear-gradient(97deg,rgba(196,154,69,.06) 0 2px,transparent 2px 6px)}
