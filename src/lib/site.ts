@@ -9,6 +9,8 @@ export const site = {
   email: "contato@mbx.com.br",
   city: "São Paulo · SP",
   serves: "Todo o país",
+  // Fase 5: trocar pela URL final (domínio próprio ou *.vercel.app) assim que o deploy existir.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mbx.com.br",
 } as const;
 
 /** Monta um link do WhatsApp com mensagem pré-preenchida. */
