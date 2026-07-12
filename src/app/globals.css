@@ -258,6 +258,9 @@
 .plan .drawline{stroke-dasharray:1;stroke-dashoffset:1}
 .plan.go .drawline{animation:plot 1.5s var(--ease) forwards}
 .plan .fade{opacity:0}
+.plan a{cursor:pointer}
+.plan a:hover .fillk{fill:rgba(169,126,47,.18)}
+.plan a:hover .lbl{fill:var(--brass)}
 .plan.go .fade{animation:pfade .5s ease forwards}
 .plan.go .d1{animation-delay:.15s}.plan.go .d2{animation-delay:.4s}.plan.go .d3{animation-delay:.7s}
 .plan.go .d4{animation-delay:1s}.plan.go .d5{animation-delay:1.25s}
