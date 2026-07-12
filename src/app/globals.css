@@ -6,17 +6,17 @@
 
 @theme inline {
   /* ---- Paleta MBX (portada do design original) ---- */
-  --color-vellum: #f1efe9; /* papel de desenho */
-  --color-panel: #f7f5ef;
-  --color-kraft: #e5e0d3; /* carimbo */
-  --color-ink: #1c1e20; /* grafite */
-  --color-ink-2: #45484a;
-  --color-muted-ink: #8a8578;
-  --color-line: #c3bdb0; /* fio de cota */
-  --color-line-2: #d6d1c5;
-  --color-brass: #a97e2f; /* assinatura: cotas, marcadores */
-  --color-brass-2: #c49a45;
-  --color-redline: #c0622a; /* anotação/redline */
+  --color-vellum: var(--vellum); /* papel de desenho */
+  --color-panel: var(--panel);
+  --color-kraft: var(--kraft); /* carimbo */
+  --color-ink: var(--ink); /* grafite */
+  --color-ink-2: var(--ink-2);
+  --color-muted-ink: var(--muted-ink);
+  --color-line: var(--line); /* fio de cota */
+  --color-line-2: var(--line-2);
+  --color-brass: var(--brass); /* assinatura: cotas, marcadores */
+  --color-brass-2: var(--brass-2);
+  --color-redline: var(--red); /* anotação/redline */
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -111,6 +111,54 @@
   --sidebar-accent-foreground: #1c1e20;
   --sidebar-border: #c3bdb0;
   --sidebar-ring: #a97e2f;
+}
+
+.dark {
+  /* Aliases (paleta invertida: prancheta à noite) */
+  --vellum: #16181a;
+  --panel: #1e2023;
+  --kraft: #26282b;
+  --ink: #ece8df;
+  --ink-2: #c7c2b4;
+  --muted-ink: #8a8578;
+  --line: #3a3d3f;
+  --line-2: #2c2e30;
+  --brass: #c49a45;
+  --brass-2: #a97e2f;
+  --red: #d97b46;
+
+  /* shadcn semânticos remapeados */
+  --background: #16181a;
+  --foreground: #ece8df;
+  --card: #1e2023;
+  --card-foreground: #ece8df;
+  --popover: #1e2023;
+  --popover-foreground: #ece8df;
+  --primary: #ece8df;
+  --primary-foreground: #16181a;
+  --secondary: #26282b;
+  --secondary-foreground: #ece8df;
+  --muted: #26282b;
+  --muted-foreground: #8a8578;
+  --accent: #1e2023;
+  --accent-foreground: #ece8df;
+  --destructive: #d97b46;
+  --border: #3a3d3f;
+  --input: #3a3d3f;
+  --ring: #c49a45;
+  --chart-1: #c49a45;
+  --chart-2: #a97e2f;
+  --chart-3: #c7c2b4;
+  --chart-4: #8a8578;
+  --chart-5: #ece8df;
+  --sidebar: #1e2023;
+  --sidebar-foreground: #ece8df;
+  --sidebar-primary: #ece8df;
+  --sidebar-primary-foreground: #16181a;
+  --sidebar-accent: #26282b;
+  --sidebar-accent-foreground: #ece8df;
+  --sidebar-border: #3a3d3f;
+  --sidebar-ring: #c49a45;
 }
 
 @layer base {
@@ -385,4 +433,12 @@
   *{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}.draw .dim .ln::before{transform:scaleX(1)}.draw .fig{opacity:1}
   .phase .pln i{width:100%}.plan .drawline{stroke-dashoffset:0}.plan .fade{opacity:1}
+}
+
+/* toggle de tema: desliga o cross-fade padrão da View Transitions API,
+   o botão em theme-toggle.tsx desenha sua própria animação de círculo */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
