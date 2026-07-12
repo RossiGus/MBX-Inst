@@ -6,7 +6,7 @@ import type { Categoria } from "@/lib/supabase";
 import { supabase } from "@/lib/supabase";
 
 export const metadata: Metadata = {
-  title: "Produtos — MBX Aço Inox",
+  title: "Produtos",
   description:
     "Vitrine de cozinhas, bancadas, coifas e câmaras em aço inox 304 fabricadas pela MBX. Solicite orçamento pelo WhatsApp.",
 };

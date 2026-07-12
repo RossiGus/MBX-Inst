@@ -55,7 +55,7 @@ export default function LoginPage() {
             onChange={(e) => setSenha(e.target.value)}
           />
         </div>
-        {erro && <p className="rnote" style={{ color: "var(--red)" }}>{erro}</p>}
+        {erro && <p className="rnote" role="alert" style={{ color: "var(--red)" }}>{erro}</p>}
         <button type="submit" className="btn btn-1" disabled={loading}>
           <span>{loading ? "Entrando…" : "Entrar"}</span>
         </button>

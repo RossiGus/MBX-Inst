@@ -14,10 +14,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const produto = await getProduto(id);
-  if (!produto) return { title: "Produto — MBX Aço Inox" };
+  if (!produto) return { title: "Produto" };
+
+  const description = produto.descricao || `${produto.nome}, fabricado em aço inox 304 pela MBX.`;
+  const imagem = produto.imagens[0];
+
   return {
-    title: `${produto.nome} — MBX Aço Inox`,
-    description: produto.descricao || `${produto.nome}, fabricado em aço inox 304 pela MBX.`,
+    title: produto.nome,
+    description,
+    openGraph: { title: produto.nome, description, images: imagem ? [imagem] : undefined },
   };
 }
 

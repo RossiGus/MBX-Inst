@@ -4,6 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { HomeEffects } from "@/components/home-effects";
 import { site } from "@/lib/site";
 
 const spaceGrotesk = Space_Grotesk({
@@ -55,6 +56,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${ibmPlexMono.variable}`}
     >
       <body className="overflow-x-hidden">
+        <HomeEffects />
         <Nav />
         <main>{children}</main>
         <Footer />

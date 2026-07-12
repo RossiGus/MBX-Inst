@@ -1,11 +1,8 @@
 import Link from "next/link";
-import { HomeEffects } from "@/components/home-effects";
 
 export default function Home() {
   return (
     <>
-      <HomeEffects />
-
       {/* HERO */}
       <header className="hero" id="top">
         <span className="crop tl" />
