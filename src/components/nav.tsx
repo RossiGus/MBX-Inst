@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
   { href: "/#fazemos", label: "O que fazemos" },
@@ -62,6 +63,7 @@ export function Nav() {
           >
             Solicitar projeto →
           </Link>
+          <ThemeToggle />
           <button
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
@@ -99,6 +101,9 @@ export function Nav() {
         >
           Solicitar projeto →
         </Link>
+        <div className="mt-[18px] self-start">
+          <ThemeToggle />
+        </div>
       </div>
     </>
   );
