@@ -35,3 +35,21 @@ export async function getProduto(id: string): Promise<Produto | null> {
   }
   return data;
 }
+
+export async function getProdutoDestaque(): Promise<Produto | null> {
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("produtos")
+    .select("*")
+    .eq("destaque", true)
+    .order("criado_em", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Erro ao buscar produto destaque:", error.message);
+    return null;
+  }
+  return data;
+}
