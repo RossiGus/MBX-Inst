@@ -2,18 +2,29 @@
 
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useSyncExternalStore } from "react";
 
 type ViewTransitionDocument = Document & {
   startViewTransition?: (callback: () => void) => { ready: Promise<void> };
 };
 
+function subscribeNoop() {
+  return () => {};
+}
+
+/** True apenas depois da hidratação no cliente — evita mismatch de SSR sem setState em efeito. */
+function useMounted() {
+  return useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false
+  );
+}
+
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const btnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => setMounted(true), []);
 
   function toggle() {
     const next = resolvedTheme === "dark" ? "light" : "dark";
