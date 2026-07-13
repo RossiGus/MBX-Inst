@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# arquivos temporarios de seed (nao versionar)
+/tmp-produtos/
+/tmp-seed-produtos.mjs
