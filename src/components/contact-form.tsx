@@ -32,7 +32,8 @@ export function ContactForm() {
     return t;
   }
 
-  function submit() {
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
     const badNome = !nome.trim();
     const badFone = fone.replace(/\D/g, "").length < 10;
     setErrNome(badNome);
@@ -43,7 +44,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="req rv">
+    <form className="req rv" onSubmit={submit}>
       <div className="left">
         <span className="tag">Contato</span>
         <h2>Vamos desenhar a sua cozinha.</h2>
@@ -65,8 +66,9 @@ export function ContactForm() {
           <div className={`fld${errNome ? " err" : ""}`}>
             <label htmlFor="nome">Seu nome</label>
             <input id="nome" type="text" placeholder="como te chamamos" autoComplete="name"
+              aria-invalid={errNome} aria-describedby="nome-erro"
               value={nome} onChange={(e) => { setNome(e.target.value); setErrNome(false); }} />
-            <span className="fmsg">Informe seu nome</span>
+            <span id="nome-erro" className="fmsg" role="alert">Informe seu nome</span>
           </div>
           <div className="fld">
             <label htmlFor="estab">Estabelecimento</label>
@@ -78,8 +80,9 @@ export function ContactForm() {
           <div className={`fld${errFone ? " err" : ""}`}>
             <label htmlFor="fone">WhatsApp</label>
             <input id="fone" type="tel" placeholder="(11) 9…" autoComplete="tel"
+              aria-invalid={errFone} aria-describedby="fone-erro"
               value={fone} onChange={(e) => { setFone(e.target.value); setErrFone(false); }} />
-            <span className="fmsg">Informe um WhatsApp para retorno</span>
+            <span id="fone-erro" className="fmsg" role="alert">Informe um WhatsApp para retorno</span>
           </div>
           <div className="fld">
             <label htmlFor="tipo">Tipo de projeto</label>
@@ -93,16 +96,16 @@ export function ContactForm() {
           <textarea id="msg" placeholder="espaço, medidas aproximadas, prazo, o que precisa resolver…"
             value={msg} onChange={(e) => setMsg(e.target.value)} />
         </div>
-        <button className="btn btn-1" type="button" onClick={submit}>
+        <button className="btn btn-1" type="submit">
           <span>Enviar pelo WhatsApp →</span>
         </button>
         <p className="rnote">Abre a conversa já preenchida — você revisa antes de mandar.</p>
         {sent && (
-          <p className="rnote" style={{ color: "var(--brass)", fontWeight: 500 }}>
+          <p className="rnote" role="status" style={{ color: "var(--brass)", fontWeight: 500 }}>
             Abrindo o WhatsApp com sua requisição…
           </p>
         )}
       </div>
-    </div>
+    </form>
   );
 }

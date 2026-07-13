@@ -1,11 +1,13 @@
 import Link from "next/link";
-import { HomeEffects } from "@/components/home-effects";
+import { getProdutosDestaque } from "@/lib/produtos";
+import { ProdutoParallax } from "@/components/produto-parallax";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const produtosDestaque = await getProdutosDestaque();
   return (
     <>
-      <HomeEffects />
-
       {/* HERO */}
       <header className="hero" id="top">
         <span className="crop tl" />
@@ -64,26 +66,32 @@ export default function Home() {
                 aria-label="Vista em planta de uma cozinha industrial, cotada"
               >
                 <rect className="stroke drawline" x="40" y="40" width="304" height="300" pathLength={1} />
-                <g className="fade d1">
-                  <rect className="stroke thin fillk" x="56" y="52" width="176" height="22" />
-                  <text className="lbl" x="60" y="66">COIFA</text>
-                </g>
-                <g className="fade d2">
-                  <rect className="stroke thin fillk" x="52" y="256" width="88" height="68" />
-                  <text className="lbl" x="60" y="292">FOGÃO</text>
-                  <rect className="stroke thin fillk" x="150" y="256" width="70" height="68" />
-                  <text className="lbl" x="158" y="292">CHAPA</text>
-                </g>
+                <Link href="/produtos?categoria=exaustao" aria-label="Ver produtos de exaustão">
+                  <g className="fade d1">
+                    <rect className="stroke thin fillk" x="56" y="52" width="176" height="22" />
+                    <text className="lbl" x="60" y="66">COIFA</text>
+                  </g>
+                </Link>
+                <Link href="/produtos?categoria=coccao" aria-label="Ver produtos de cocção">
+                  <g className="fade d2">
+                    <rect className="stroke thin fillk" x="52" y="256" width="88" height="68" />
+                    <text className="lbl" x="60" y="292">FOGÃO</text>
+                    <rect className="stroke thin fillk" x="150" y="256" width="70" height="68" />
+                    <text className="lbl" x="158" y="292">CHAPA</text>
+                  </g>
+                </Link>
                 <g className="fade d3">
                   <rect className="stroke thin fillk" x="150" y="140" width="112" height="58" />
                   <text className="lbl" x="158" y="172">PASS</text>
                 </g>
-                <g className="fade d4">
-                  <rect className="stroke thin fillk" x="300" y="92" width="44" height="140" />
-                  <text className="lbl" x="306" y="120">BANC.</text>
-                  <rect className="stroke thin fillk" x="300" y="256" width="44" height="68" />
-                  <text className="lbl" x="306" y="292">CUBA</text>
-                </g>
+                <Link href="/produtos?categoria=mobiliario" aria-label="Ver produtos de mobiliário">
+                  <g className="fade d4">
+                    <rect className="stroke thin fillk" x="300" y="92" width="44" height="140" />
+                    <text className="lbl" x="306" y="120">BANC.</text>
+                    <rect className="stroke thin fillk" x="300" y="256" width="44" height="68" />
+                    <text className="lbl" x="306" y="292">CUBA</text>
+                  </g>
+                </Link>
                 <g className="fade d5">
                   <line className="dimc" x1="40" y1="360" x2="344" y2="360" />
                   <line className="dimc" x1="40" y1="352" x2="40" y2="368" />
@@ -110,6 +118,8 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {produtosDestaque.length > 0 && <ProdutoParallax produtos={produtosDestaque} />}
 
       {/* METRICS */}
       <section className="wrap">
