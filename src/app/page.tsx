@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { getProdutoDestaque } from "@/lib/produtos";
+import { getProdutosDestaque } from "@/lib/produtos";
 import { ProdutoParallax } from "@/components/produto-parallax";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const produtoDestaque = await getProdutoDestaque();
+  const produtosDestaque = await getProdutosDestaque();
   return (
     <>
       {/* HERO */}
@@ -119,7 +119,7 @@ export default async function Home() {
         </div>
       </header>
 
-      {produtoDestaque && <ProdutoParallax produto={produtoDestaque} />}
+      {produtosDestaque.length > 0 && <ProdutoParallax produtos={produtosDestaque} />}
 
       {/* METRICS */}
       <section className="wrap">

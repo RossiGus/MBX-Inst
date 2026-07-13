@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import type { Produto } from "@/lib/supabase";
 
-export function ProdutoParallax({ produto }: { produto: Produto }) {
+const INTERVALO_MS = 6000;
+
+export function ProdutoParallax({ produtos }: { produtos: Produto[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -14,8 +16,19 @@ export function ProdutoParallax({ produto }: { produto: Produto }) {
   });
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.15, 1]);
 
-  const imagem = produto.imagens[0];
-  if (!imagem) return null;
+  const comImagem = produtos.filter((p) => p.imagens[0]);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (comImagem.length < 2) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % comImagem.length);
+    }, INTERVALO_MS);
+    return () => clearInterval(id);
+  }, [comImagem.length]);
+
+  if (comImagem.length === 0) return null;
+  const produto = comImagem[index % comImagem.length];
 
   return (
     <section className="sec" ref={ref}>
@@ -31,14 +44,25 @@ export function ProdutoParallax({ produto }: { produto: Produto }) {
         </div>
         <div className="relative mt-[32px] h-[60vh] min-h-[360px] w-full overflow-hidden border border-line">
           <motion.div style={{ scale }} className="relative h-full w-full">
-            <Image
-              src={imagem}
-              alt={produto.nome}
-              fill
-              sizes="100vw"
-              style={{ objectFit: "cover" }}
-              priority={false}
-            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={produto.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={produto.imagens[0]}
+                  alt={produto.nome}
+                  fill
+                  sizes="100vw"
+                  style={{ objectFit: "cover" }}
+                  priority={false}
+                />
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>
